@@ -6,6 +6,21 @@
 
 The project uses **Power Query** for data transformation, **DAX** for HR metrics, a dedicated **Date Table** for time-based analysis, and Power BI interactive features such as slicers, page navigation, and drill-through.
 
+## Dashboard Previwe
+
+### Overview(Page-01)
+<img width="1332" height="745" alt="Screenshot 2026-09-02 151149" src="https://github.com/user-attachments/assets/a5002376-4b27-4970-b394-4586aacabee1" />
+
+
+### Attrition(Page-02)
+<img width="1329" height="744" alt="Screenshot 2026-09-02 151202" src="https://github.com/user-attachments/assets/ca4d6b7d-ec57-43e3-9e21-7a4e9164377e" />
+
+
+
+### Employee Details(Page-03)
+<img width="1329" height="743" alt="Screenshot 2026-09-02 151218" src="https://github.com/user-attachments/assets/aae5d5c7-8da6-4629-b679-00484b382cd2" />
+
+
 ## Target Domain
 
 - HR Analytics
