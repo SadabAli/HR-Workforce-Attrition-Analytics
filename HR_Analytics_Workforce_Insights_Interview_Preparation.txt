@@ -1,0 +1,356 @@
+HR ANALYTICS & WORKFORCE INSIGHTS DASHBOARD
+INTERVIEW PREPARATION GUIDE
+
+Target domain:
+HR Analytics / People Analytics / Workforce Analytics / HR Reporting
+
+Target roles:
+HR Data Analyst
+HR Analytics Analyst
+HR Reporting Analyst
+People Analytics Analyst
+Workforce Analytics Analyst
+Data Analyst - HR / People Analytics
+BI Analyst - HR
+
+============================================================
+1. 60-SECOND PROJECT INTRODUCTION
+============================================================
+
+"I built an HR Analytics and Workforce Insights Dashboard in Power BI to analyze workforce composition and employee attrition. I started with Power Query to select and prepare the required HR fields. I then created a dedicated Date Table and modeled both hire and termination dates. The hire-date relationship is active, while the termination-date relationship is inactive and activated with USERELATIONSHIP when calculating terminated employees. I created DAX measures for total employees, active employees, terminated employees, average salary, and attrition rate. The final report contains three pages: Overview, Attrition, and Employee Details. The analysis identified 104 terminated employees and 207 active employees, and 83 of the 104 terminations were from the Production department. The dashboard also analyzes termination reasons and employee demographics and provides drill-through for employee-level investigation."
+
+============================================================
+2. PROJECT STORY
+============================================================
+
+Problem:
+HR stakeholders need a clear view of workforce composition and employee turnover.
+
+Data preparation:
+Used Power Query and selected the required employee, salary, department, demographic, employment-date, and termination fields.
+
+Modeling:
+Created a Date Table and connected it to both DateofHire and DateofTermination.
+
+DAX:
+Created reusable measures for total employees, active employees, terminated employees, average salary, and attrition rate.
+
+Reporting:
+Created three Power BI pages:
+1. Overview
+2. Attrition
+3. Employee Details
+
+Business output:
+The report helps investigate workforce composition, employee turnover, termination reasons, and employee-level details.
+
+============================================================
+3. DATA PREPARATION QUESTIONS
+============================================================
+
+Q1. Why did you use Power Query?
+
+Answer:
+"I used Power Query for the data preparation stage. In this project, I selected the columns required for workforce, compensation, demographic, employment-date, and termination analysis. Power Query keeps the transformation steps before the modeling and visualization stage."
+
+Q2. Which columns did you keep?
+
+Answer:
+"Employee_Name, EmpID, Salary, Position, State, DOB, Sex, MaritalDesc, CitizenDesc, RaceDesc, DateofHire, DateofTermination, TermReason, EmploymentStatus, Department, and ManagerName."
+
+Q3. Why did you remove unnecessary columns?
+
+Answer:
+"Because the dashboard focuses on workforce and attrition analysis. Keeping only the required fields makes the model easier to understand and keeps the reporting layer focused."
+
+============================================================
+4. DATA MODELING QUESTIONS
+============================================================
+
+Q4. Why did you create a Date Table?
+
+Answer:
+"I created a dedicated Date Table so that the report could perform consistent year and month analysis and support both hiring-date and termination-date reporting."
+
+Q5. What is the purpose of the two relationships?
+
+Answer:
+"The Date Table is related to DateofHire and DateofTermination. The hire relationship is active. The termination relationship is inactive because one Date Table is being used for two different date roles."
+
+Q6. Why is DateofTermination inactive?
+
+Answer:
+"Only one relationship between the same two tables can be active for a given path. Since the report's default time context is based on DateofHire, the termination relationship remains inactive and is activated only when a termination-based measure needs it."
+
+Q7. Why did you use USERELATIONSHIP()?
+
+Answer:
+"USERELATIONSHIP allows the measure to temporarily use the inactive DateofTermination relationship. I used it inside the Terminated Employee measure so termination trends are analyzed against the termination date."
+
+============================================================
+5. DAX QUESTIONS
+============================================================
+
+Q8. Explain Total Employees.
+
+Answer:
+"Total Employees uses DISTINCTCOUNT on EmpID. I use DISTINCTCOUNT because the employee identifier is the field representing unique employees."
+
+DAX:
+Total Employess =
+DISTINCTCOUNT(HRDataset_v14[EmpID])
+
+Q9. Explain Active Employee.
+
+Answer:
+"It calculates Total Employees while filtering the HR table to records where EmploymentStatus equals Active."
+
+Q10. Explain Terminated Employee.
+
+Answer:
+"It calculates Total Employees where EmploymentStatus is not Active and activates the DateofTermination relationship using USERELATIONSHIP. This makes the measure work correctly for termination-based time analysis."
+
+Q11. Why use CALCULATE?
+
+Answer:
+"CALCULATE changes the filter context under which a measure is evaluated. Here I use it to apply employment-status filtering and activate the required date relationship."
+
+Q12. Why use DIVIDE instead of /?
+
+Answer:
+"DIVIDE is safer because it handles division-by-zero cases more gracefully and allows an alternate result if needed."
+
+Q13. Explain Average Salary.
+
+Answer:
+"It uses AVERAGE over the Salary column."
+
+Q14. What does the Attrition Rate measure do?
+
+Answer:
+"In this project the tutorial defines attrition rate as Terminated Employees divided by Active Employees. I followed that definition for the dashboard."
+
+IMPORTANT:
+Do not describe 50.24% as a standard annual company attrition benchmark.
+
+============================================================
+6. EMPLOYEE AGE QUESTIONS
+============================================================
+
+Q15. How did you calculate employee age?
+
+Answer:
+"I used DATEDIFF between DOB and TODAY() with YEAR as the interval."
+
+Q16. Why are age bands useful?
+
+Answer:
+"Age bands make demographic analysis easier to read than showing every individual age. They allow HR users to compare workforce groups."
+
+Q17. What is a limitation of TODAY()?
+
+Answer:
+"Because it uses the current date, the calculated age changes over time. Therefore, the value is dynamic."
+
+============================================================
+7. DASHBOARD QUESTIONS
+============================================================
+
+Q18. What are the three pages?
+
+Answer:
+"Overview, Attrition, and Employee Details."
+
+Q19. What is the purpose of Overview?
+
+Answer:
+"It provides workforce KPIs and demographic composition so users can understand the overall employee population."
+
+Q20. What is the purpose of Attrition?
+
+Answer:
+"It focuses on employee exits and analyzes termination trends by year, gender, and termination reason."
+
+Q21. What is the purpose of Employee Details?
+
+Answer:
+"It provides employee-level reporting and allows users to filter by position, department, and year and investigate detailed employee records."
+
+Q22. Why use drill-through?
+
+Answer:
+"Drill-through allows the user to move from summary-level reporting into a more detailed employee-level view while carrying the relevant filter context."
+
+Q23. Why use slicers?
+
+Answer:
+"Slicers allow HR users to interactively filter the report instead of relying on a fixed view."
+
+============================================================
+8. BUSINESS FINDINGS
+============================================================
+
+Q24. What were the main findings?
+
+Answer:
+"The dashboard identified 104 terminated employees and 207 active employees. It also showed that 83 of the 104 terminations occurred in the Production department. The leading recorded termination reasons included Another position, Unhappy, and More money."
+
+Q25. What does the Production result mean?
+
+Answer:
+"It shows a concentration of terminations in Production. It does not prove that the department causes attrition. It indicates that Production is an area worth investigating further."
+
+Q26. What were the leading termination reasons?
+
+Answer:
+"Another position had 20 records, Unhappy had 14, and More money had 11."
+
+Q27. What recommendation could HR make from the analysis?
+
+Answer:
+"HR could investigate why turnover is concentrated in Production and review the most frequent recorded termination reasons. Further analysis could compare these patterns with satisfaction, engagement, compensation, tenure, or recruitment source if those fields are available and analyzed."
+
+============================================================
+9. ATTRITION RATE WARNING
+============================================================
+
+Q28. Your attrition rate is 50.24%. Is that realistic?
+
+Recommended answer:
+
+"The 50.24% figure comes from the formula used in this project:
+Terminated Employees divided by Active Employees. It is a portfolio-project metric based on the dataset and should not be presented as a standard annual HR attrition benchmark. In a real organization, attrition would need a clearly defined time period and an agreed HR methodology."
+
+Do not defend 50.24% as a real-world benchmark.
+
+============================================================
+10. BUSINESS ANALYSIS QUESTIONS
+============================================================
+
+Q29. Did the dashboard identify the cause of attrition?
+
+Answer:
+"No. It identified patterns and recorded termination reasons. The analysis is descriptive and does not establish causation."
+
+Q30. Can you say Production causes higher attrition?
+
+Answer:
+"No. I can say Production had 83 of the 104 recorded terminations in this dataset. That indicates concentration, but it does not establish causation."
+
+Q31. How would you investigate the reason further?
+
+Answer:
+"I would segment the terminated employees by department, tenure, salary, engagement, satisfaction, performance, recruitment source, and other relevant HR variables, then compare the results with the active employee population."
+
+============================================================
+11. HR DOMAIN QUESTIONS
+============================================================
+
+Q32. What is HR Analytics?
+
+Answer:
+"HR Analytics is the use of employee and workforce data to understand workforce patterns and support HR decisions, such as retention, hiring, workforce planning, compensation, and employee engagement."
+
+Q33. What is attrition?
+
+Answer:
+"Attrition refers to employees leaving an organization. In reporting, the exact attrition definition should be agreed based on the organization and reporting period."
+
+Q34. What is workforce analytics?
+
+Answer:
+"It is the analysis of workforce data to understand employee composition, movement, performance, and other workforce patterns that can support business decisions."
+
+============================================================
+12. WHAT YOU SHOULD SAY ABOUT TOOLS
+============================================================
+
+Power BI:
+"I used Power BI to build the interactive reports and dashboards."
+
+Power Query:
+"I used Power Query for the data transformation and column selection stage."
+
+DAX:
+"I used DAX to create reusable HR measures and support filter-context-based calculations."
+
+Data Modeling:
+"I created a Date Table and modeled both hire and termination dates using active and inactive relationships."
+
+Do not claim:
+- Workday experience
+- Qlik Sense experience
+unless you actually gain that experience later.
+
+============================================================
+13. LIMITATIONS
+============================================================
+
+Be ready to mention these:
+
+1. The dataset is a portfolio/practice dataset, not live company HR data.
+2. The dashboard is descriptive and does not prove causality.
+3. The attrition formula follows the project's implementation and is not automatically a standard annual HR formula.
+4. The termination relationship must be activated for termination-based analysis.
+5. Employee Age is dynamic because it uses TODAY().
+
+============================================================
+14. POSSIBLE INTERVIEW FOLLOW-UPS
+============================================================
+
+Q. Why Power BI instead of Excel?
+
+Answer:
+"For this project, Power BI made it easier to build an interactive multi-page reporting experience, manage relationships, create DAX measures, and provide slicers and drill-through."
+
+Q. Why use a separate measure table?
+
+Answer:
+"I used the _measure table to keep measures organized separately from the main data table."
+
+Q. What would you add next?
+
+Answer:
+"I would extend the report with deeper analysis of satisfaction, engagement, performance, recruitment source, tenure, and department-level attrition if those fields are validated and included in the report."
+
+Q. How would you make the report useful for HR leaders?
+
+Answer:
+"I would focus the report on a few decision-oriented questions: where attrition is concentrated, what termination reasons are most frequent, which workforce segments need further investigation, and where trends are changing over time."
+
+============================================================
+15. RESUME-LEVEL ANSWER
+============================================================
+
+Project:
+HR Analytics & Workforce Insights Dashboard
+
+Tools:
+Power BI, Power Query, DAX, Data Modeling
+
+Resume bullets:
+- Identified 104 terminated employees and 207 active employees, resulting in a 50.24% attrition rate.
+- Analyzed attrition trends by year, gender, and termination reason to identify workforce turnover patterns.
+- Built a 3-page Power BI report with workforce KPIs, demographic analysis, and employee-level drill-through reporting using DAX and date relationships.
+
+============================================================
+16. FINAL INTERVIEW FRAMEWORK
+============================================================
+
+When asked "Explain your project", use:
+
+1. Business problem
+2. Data preparation
+3. Data modeling
+4. DAX measures
+5. Dashboard design
+6. Key findings
+7. Business interpretation
+8. Limitations
+
+Simple structure:
+
+Problem → Power Query → Date Model → DAX → Power BI → Findings → Recommendations → Limitations
+
+Do not overclaim.
+Keep the explanation consistent with what you actually implemented.
