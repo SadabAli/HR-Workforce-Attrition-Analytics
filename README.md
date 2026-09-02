@@ -243,7 +243,7 @@ The project uses this tutorial-defined attrition formula for the dashboard.
 
 # Dashboard Structure
 
-## Page 1 — Overview
+## Page 1 - Overview
 
 The Overview page provides a high-level view of the workforce.
 
@@ -276,7 +276,7 @@ This page gives HR stakeholders a quick overview of workforce composition and he
 
 ---
 
-# Page 2 — Attrition
+# Page 2 - Attrition
 
 The Attrition page focuses specifically on employee exits.
 
@@ -303,7 +303,7 @@ This page helps HR investigate employee turnover over time and understand the re
 
 ---
 
-# Page 3 — Employee Details
+# Page 3 - Employee Details
 
 The Employee Details page provides employee-level reporting.
 
@@ -357,9 +357,9 @@ Current dashboard values include:
 - **50.24% attrition rate using the project's defined formula**
 - **83 of 104 terminations occurred in the Production department**
 - Top recorded termination reasons include:
-  - **Another position — 20**
-  - **Unhappy — 14**
-  - **More money — 11**
+  - **Another position - 20**
+  - **Unhappy - 14**
+  - **More money - 11**
 
 These figures are portfolio-project findings from the provided HR dataset and should be presented as analysis of the dataset rather than as benchmarks for a real company's HR population.
 
@@ -398,65 +398,3 @@ These figures are portfolio-project findings from the provided HR dataset and sh
 - Time-based analysis
 
 ---
-
-# Resume Description
-
-## HR Analytics & Workforce Insights Dashboard
-
-**Power BI, Power Query, DAX, Data Modeling**
-
-- Identified **104 terminated employees and 207 active employees**, resulting in a **50.24% attrition rate**.
-- Analyzed attrition trends by **year, gender, and termination reason** to identify workforce turnover patterns.
-- Built a **3-page Power BI report** with workforce KPIs, demographic analysis, and employee-level drill-through reporting using DAX and date relationships.
-
----
-
-# Interview Explanation — 60 Seconds
-
-“I built an HR Analytics and Workforce Insights Dashboard in Power BI to analyze workforce composition and employee attrition. I first used Power Query to select and prepare the required HR fields. Then I created a dedicated Date Table and modeled both hire and termination dates, keeping the termination relationship inactive and activating it with USERELATIONSHIP when calculating terminated employees. I created DAX measures for total employees, active employees, terminated employees, average salary, and attrition rate. The final report has three pages: Overview, Attrition, and Employee Details. The analysis identified 104 terminated and 207 active employees, and showed that 83 of the 104 terminations were from the Production department. The report also breaks down termination reasons and employee demographics using interactive filters and drill-through.”
-
----
-
-# Important Interview Notes
-
-## Do not say
-
-- “This dashboard proves the reasons employees leave.”
-- “The dashboard proves Production causes attrition.”
-- “The 50.24% rate is a real-world HR benchmark.”
-- “The project uses Workday.”
-- “I have Qlik Sense experience.”
-
-## Prefer saying
-
-- “The analysis showed a concentration of terminations in Production.”
-- “The dashboard helps HR investigate termination patterns.”
-- “The attrition calculation follows the definition used in the project.”
-- “I used Power BI, Power Query, DAX, and data modeling.”
-- “Workday and Qlik Sense are gaps in my current hands-on experience.”
-
----
-
-# Project Limitations
-
-1. The dataset is a portfolio/practice HR dataset rather than live organizational HR data.
-2. The dashboard identifies patterns but does not establish causation.
-3. The tutorial-defined attrition formula is `Terminated Employees / Active Employees`; this should not automatically be treated as a standard annual HR attrition formula.
-4. A relationship to termination date is inactive and must be explicitly activated with `USERELATIONSHIP()` for termination analysis.
-5. Employee Age uses `TODAY()`, so the calculated age changes as time passes.
-
----
-
-# Suggested Future Enhancements
-
-After the tutorial version is complete, the project can be extended with additional analysis supported by the dataset, such as:
-
-- Attrition by department
-- Attrition by recruitment source
-- Attrition by employee satisfaction
-- Attrition by engagement
-- Attrition by performance score
-- Absence analysis
-- Salary analysis by department or position
-
-These should only be added if they are actually implemented and validated.
